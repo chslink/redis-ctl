@@ -13,14 +13,12 @@ services:
         - TZ=Asia/Shanghai
       volumes:
         - .:/code
-      privileged: true
       command: python daemon.py
       depends_on:
         - redisctldb
 
     redisctldb:
         image: mariadb
-        privileged: true
         restart: always
         volumes:
           - ../mysqldata:/var/lib/mysql
