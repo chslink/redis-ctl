@@ -79,7 +79,7 @@ class RedisCtl(Flask):
 
     @staticmethod
     def db_uri(config):
-        return 'mysql://%s:%s@%s:%d/%s?charset=%s' % (
+        return 'mysql+pymysql://%s:%s@%s:%d/%s?charset=%s' % (
             config.MYSQL_USERNAME, config.MYSQL_PASSWORD,
             config.MYSQL_HOST, config.MYSQL_PORT, config.MYSQL_DATABASE, config.MYSQL_CHARSET)
 

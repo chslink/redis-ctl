@@ -1,4 +1,3 @@
-import gevent
 import gevent.monkey
 
 gevent.monkey.patch_all()
@@ -19,9 +18,18 @@ def run(interval, app):
         d.join()
 
 
+def front(app):
+    app.register_blueprints()
+    app.write_polling_targets()
+    app.run(host='127.0.0.1' if app.debug else '0.0.0.0',
+            port=config.SERVER_PORT)
+
+
 def main():
     app = config.App(config)
+    gevent.spawn(front, app).start()
     run(config.POLL_INTERVAL, app)
+
 
 if __name__ == '__main__':
     main()

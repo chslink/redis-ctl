@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+    app:
+      restart: always
+      build:
+        context: .
+        dockerfile: Dockerfile
+      working_dir: /code
+      ports:
+        - "5000:5000"
+      environment:
+        - TZ=Asia/Shanghai
+      volumes:
+        - .:/code
+      privileged: true
+      command: python daemon.py
+      depends_on:
+        - redisctldb
+
+    redisctldb:
+        image: mariadb
+        privileged: true
+        restart: always
+        volumes:
+          - ../mysqldata:/var/lib/mysql
+        environment:
+          TZ: 'Asia/Shanghai'
+          MYSQL_ROOT_PASSWORD: PASSW0RD
+          MYSQL_USER: redisctl
+          MYSQL_PASSWORD: PASSW0RD
+          MYSQL_DATABASE: redisctl
