@@ -1,5 +1,5 @@
 FROM python:2-alpine
-MAINTAINER Zhong Xianghua <blless@qq.com>
+MAINTAINER blless<blless@qq.com>
 ENV TZ Asia/Shanghai
 ENV APP_ROOT /code
 RUN echo 'http://mirrors.aliyun.com/alpine/v3.4/main/' > /etc/apk/repositories
